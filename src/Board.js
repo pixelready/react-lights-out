@@ -29,7 +29,8 @@ import "./Board.css";
 
 function Board({ nrows, ncols, chanceLightStartsOn }) {
   const [board, setBoard] = useState(createBoard());
-
+  console.log('board', board);
+  const won = hasWon() ? false : true;
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function getTrueFalse(){
     let val = Math.floor(Math.random()*2);
@@ -53,10 +54,12 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   // if we found a true value in flattened array, we haven't won yet
   function hasWon() {
     let flatArr = board.flat();
-    return flatArr.find(true) === undefined;
+    console.log('flatArr', flatArr);
+    return flatArr.find(b => b === true);
   }
 
   function flipCellsAround(coord) {
+    console.log('coord', coord);
     setBoard(oldBoard => {
       //'1-3' => [1, 3]
       const [y, x] = coord.split("-").map(Number);
@@ -81,20 +84,24 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       
     });
   }
-    
-  // if the game is won, just show a winning msg & render nothing else
-
-    return <h1>You Win!</h1>
-    
-    //TODO: make this work
-    // return <table><tbody>{board.map(row => 
-    //           <tr>{row.map(col => 
-    //             <Cell 
-    //               isLit={board[row][col]}
-    //               flipCellsAroundMe={flipCellsAround} 
-    //               />)}
-    //             </tr>)}
-    //             </tbody></table>
-  }
+  
+  return (
+      <div>
+          <h1>{won && "You won!"}</h1>
+            <table>
+              <tbody>{board.map((row, x) => 
+                <tr>{row.map((col, y) => 
+                  <Cell 
+                    key={`${x}${y}`}
+                    id={`${x}-${y}`}
+                    isLit={board[x][y]}
+                    flipCellsAroundMe={flipCellsAround} 
+                    />)}
+                </tr>)}
+              </tbody>
+            </table>
+      </div>
+  )
+}
 
 export default Board;
