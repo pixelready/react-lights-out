@@ -90,7 +90,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
           <h1>{won && "You won!"}</h1>
             <table>
               <tbody>{board.map((row, x) => 
-                <tr>{row.map((col, y) => 
+                <tr key={x}>{row.map((col, y) => 
                   <Cell 
                     key={`${x}${y}`}
                     id={`${x}-${y}`}
