@@ -58,16 +58,26 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   function flipCellsAround(coord) {
     setBoard(oldBoard => {
+      //'1-3' => [1, 3]
       const [y, x] = coord.split("-").map(Number);
+      
+      //N,E,S,W
+      const neighborCoords = [[y-1,x],[y,x+1],[y+1,x],[y,x-1]];
+
+      const boardCopy = [];
+      for(let sub of oldBoard) boardCopy.push([...sub]);
 
       const flipCell = (y, x, boardCopy) => {
         // if this coord is actually on board, flip it
-
         if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
           boardCopy[y][x] = !boardCopy[y][x];
         }
       };
 
+      flipCell(y, x, boardCopy);
+      neighborCoords.map(([y,x]) => flipCell(y,x,boardCopy));
+
+      return boardCopy;
       // TODO: Make a (deep) copy of the oldBoard
 
       // TODO: in the copy, flip this cell and the cells around it
