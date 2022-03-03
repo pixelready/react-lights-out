@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   return (
       <div className="App">
-        <Board />
+        <Board nCols={5} nRows={5} />
       </div>
   );
 }

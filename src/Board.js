@@ -78,21 +78,23 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       neighborCoords.map(([y,x]) => flipCell(y,x,boardCopy));
 
       return boardCopy;
-      // TODO: Make a (deep) copy of the oldBoard
-
-      // TODO: in the copy, flip this cell and the cells around it
-
-      // TODO: return the copy
+      
     });
   }
-
+    
   // if the game is won, just show a winning msg & render nothing else
 
-  // TODO
-
-  // make table board
-
-  // TODO
-}
+    return <h1>You Win!</h1>
+    
+    //TODO: make this work
+    // return <table><tbody>{board.map(row => 
+    //           <tr>{row.map(col => 
+    //             <Cell 
+    //               isLit={board[row][col]}
+    //               flipCellsAroundMe={flipCellsAround} 
+    //               />)}
+    //             </tr>)}
+    //             </tbody></table>
+  }
 
 export default Board;
