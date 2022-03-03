@@ -6,5 +6,6 @@
 }
 
 .Cell-lit {
-  background-color: white;
+  background-color: #ffffff;
+    box-shadow: 0 0 60px 4px inset rgb(221 185 58), 0 0 10px 2px inset rgb(255 224 0), 0 0 5px 1px inset rgb(90 38 0);
 }
