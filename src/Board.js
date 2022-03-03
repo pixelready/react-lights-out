@@ -31,14 +31,29 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   const [board, setBoard] = useState(createBoard());
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
+  function getTrueFalse(){
+    let val = Math.floor(Math.random()*2);
+    let bool = val === 0 ? false : true;
+    return bool;
+  }
+
   function createBoard() {
     let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
+
+    for (let row=0; row<nrows; row++){
+      let subArr = [];
+      for (let col=0; col<ncols; col++){
+        subArr.push(getTrueFalse());
+      }
+      initialBoard.push(subArr);
+    }
     return initialBoard;
   }
 
+  // if we found a true value in flattened array, we haven't won yet
   function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
+    let flatArr = board.flat();
+    return flatArr.find(true) === undefined;
   }
 
   function flipCellsAround(coord) {
